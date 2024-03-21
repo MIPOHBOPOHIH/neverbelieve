@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @font-face {
+            font-family: "BiosFont";
+            src: url("WebPlus_IBM_VGA_8x16.woff") format("woff");
+        }
+        body {
+            background-color: silver;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "BiosFont";
+        }
+        #message{
+            font-size: 24px;
+            text-align: center;
+            font-family: BiosFont;
+        }
+        #countdown {
+
+            font-size: 36px;
+        }
+        #presave-button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        @media screen and (max-width: 852px) {
+            #message {
+                font-size: 25px;
+            }
+            #countdown{
+                font-size: 40px;
+            };
+            #presave-button{
+                padding: 20px 40px;
+                font-size: 25px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proxima+Nova:400,700">
+</head>
+<body>
+
+<div id="message">H3 ß3pb ß MeH9:</div>
+<div id="countdown">00:00:00</div>
+<a id="presave-button" href="https://band.link/neverbelieve" target="_blank">Пресейв</a>
+
+<script>
+    // Установите дату и время, до которых будет идти обратный отсчет (03.11.2023 00:00 Московского времени).
+    const targetDate = new Date("2024-04-04T21:00:00Z");
+
+    function updateCountdown() {
+        const currentDate = new Date();
+        const timeRemaining = targetDate - currentDate;
+        if (timeRemaining > 0) {
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else {
+            document.getElementById("countdown").innerHTML = "не верь в меня уже вышел!";
+            document.getElementById("message").style.display = "none";
+            document.getElementById("presave-button").textContent = "Слушать на всех площадках";
+
+        }
+    }
+
+    // Обновление таймера каждую секунду
+    const timerInterval = setInterval(updateCountdown, 1000);
+
+    // Первоначальное обновление таймера
+    updateCountdown();
+</script>
+</body>
+</html>
